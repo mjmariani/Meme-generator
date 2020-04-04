@@ -1,10 +1,20 @@
 
+  
+  window.addEventListener('DOMContentLoaded', (event) => {
   let myform, topText, bottomText, image, div1, div, div2, p, p2, divs, divsArr;
   
   
   myform = document.getElementById("myform");
   myform.addEventListener("submit", createMeme, true);
   const bottomPart = document.querySelector(".bottom-part");
+
+  function addingEvents(){
+  divs = document.querySelectorAll(".meme-Class"); //returns a nodelist
+  divsArr = [...divs]; //converted to array
+
+  divsArr.forEach((div)=>
+  div.addEventListener("dblclick", deleteMeme, true));
+}
 
     function createMeme(event) {
         event.preventDefault();
@@ -15,6 +25,7 @@
         
         div = document.createElement("div");
         bottomPart.appendChild(div).setAttribute("id", "meme")
+        div.setAttribute("class", "meme-Class");
         div.setAttribute("style",`background-image: url(${image});`);
         
         div1 = document.createElement("div");
@@ -31,10 +42,8 @@
 
        // div.addEventListener("dblclick", deleteMeme, true);
 
-       divs = document.querySelectorAll("#meme"); //returns a nodelist
-       divsArr = [...divs]; //converted to array
-       divsArr.forEach((div)=>
-           div.addEventListener("dblclick", deleteMeme, true));
+      
+       addingEvents();
         
          /*divsArr.forEach(
              attachEvent(textarea, 'blur', function(e) {
@@ -44,22 +53,25 @@
             removeClass(div, 'source');
         }))*/
 
+        
+
        myform.reset();
        
        }
 
-    function deleteMeme(event) {
+       function deleteMeme(event) {
         event.preventDefault;
-        bottomPart.removeChild(div);}
+        event.currentTarget.remove();
+        }
 
 
 
 
+     } );
 
 
 
-
-
+//domloaded
 
 
 
